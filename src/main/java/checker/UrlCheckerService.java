@@ -65,11 +65,21 @@ public class UrlCheckerService {
             Alert alert = site.getAlert();
             if (alert != null) {
                 // check status code - http error
-                if (response.statusCode() != 200) {
-                    // set last date of failure
-                    status.setLastFailureDt(LocalDateTime.now());
-
-                    sendAlert(site);
+                if (alert.hasCondition()) {
+                    // evaluate the alert condition
+                    int statusCode = alert.getAlertCondition().getStatusCode();
+                    if (response.statusCode() == statusCode) {
+                        // set last date of failure
+                        status.setLastFailureDt(LocalDateTime.now());
+                        sendAlert(site);
+                    }
+                } else {
+                    // otherwise standard check on the http status 200 OK
+                    if (response.statusCode() != 200) {
+                        // set last date of failure
+                        status.setLastFailureDt(LocalDateTime.now());
+                        sendAlert(site);
+                    }
                 }
             }
 

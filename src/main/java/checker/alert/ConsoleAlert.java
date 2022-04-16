@@ -7,14 +7,14 @@ public class ConsoleAlert extends Alert {
     }
 
     @Override
-    public boolean sendAlert() {
-        System.out.println("Console alert: " + this.getMessage());
-        return true;
+    public String getName() {
+        return "Console alert";
     }
 
     @Override
-    public String getName() {
-        return "Console alert";
+    public boolean sendAlert() {
+        System.out.println("Console alert: " + this.getMessage());
+        return true;
     }
 
 }
