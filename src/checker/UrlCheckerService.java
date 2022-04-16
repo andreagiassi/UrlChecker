@@ -89,7 +89,7 @@ public class UrlCheckerService {
         }
     }
 
-    public void dump() {
+    public void dumpSites() {
         System.out.println("Site status:");
         for (Site site : sites) {
             System.out.println(getSiteInfo(site));
@@ -98,6 +98,9 @@ public class UrlCheckerService {
 
     private String getSiteInfo(final Site site) {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(site.getStatus().getLastCheckDt().format(formatter));
+        stringBuilder.append(" ");
+
         stringBuilder.append(site.getStatus().getVersion() + " ");
         stringBuilder.append(site.getStatus().getHttpStatus() + " ");
         stringBuilder.append(site.getUri() + " ");
@@ -105,8 +108,6 @@ public class UrlCheckerService {
         if (site.hasAlert()) {
             stringBuilder.append(site.getAlert().getName() + " ");
         }
-
-        stringBuilder.append(site.getStatus().getLastCheckDt().format(formatter));
 
         return stringBuilder.toString();
     }

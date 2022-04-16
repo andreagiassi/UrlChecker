@@ -17,7 +17,7 @@ public class UrlCheckerMain {
         urlCheckerService.checkSites();
 
         // dump last site's status
-        urlCheckerService.dump();
+        urlCheckerService.dumpSites();
     }
 
 }
