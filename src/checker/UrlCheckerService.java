@@ -97,17 +97,18 @@ public class UrlCheckerService {
     }
 
     private String getSiteInfo(final Site site) {
-        String info = site.getStatus().getVersion() + " "
-                + site.getStatus().getHttpStatus() + " "
-                + site.getUri() + " ";
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(site.getStatus().getVersion() + " ");
+        stringBuilder.append(site.getStatus().getHttpStatus() + " ");
+        stringBuilder.append(site.getUri() + " ");
 
         if (site.hasAlert()) {
-            info += site.getAlert().getName() + " ";
+            stringBuilder.append(site.getAlert().getName() + " ");
         }
 
-        info += site.getStatus().getLastCheckDt().format(formatter);
+        stringBuilder.append(site.getStatus().getLastCheckDt().format(formatter));
 
-        return info;
+        return stringBuilder.toString();
     }
 
 }
