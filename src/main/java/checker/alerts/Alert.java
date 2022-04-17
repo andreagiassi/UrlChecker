@@ -10,6 +10,7 @@ public abstract class Alert {
 
     public Alert(String message) {
         this.message = message;
+        // default no condition
         this.alertCondition = null;
     }
 

@@ -33,7 +33,7 @@ public class UrlCheckerMain {
                 .build());
 
         // check a site with an in range condition
-        ConsoleAlert alert2 = new ConsoleAlert("404 on google site");
+        ConsoleAlert alert2 = new ConsoleAlert("In range 400-451 on google site");
 
         AlertCondition alertCondition2 = new InRangeCondition(400, 451);
         alert.setAlertCondition(alertCondition2);
