@@ -2,6 +2,8 @@ package checker.sites;
 
 import checker.alerts.Alert;
 
+import java.util.Optional;
+
 public class Site {
 
     public static int DEFAULT_TIMEOUT = 2000;
@@ -12,7 +14,7 @@ public class Site {
         this.timeout = DEFAULT_TIMEOUT;
 
         this.status = new SiteStatus();
-        this.alert = null;
+        this.alertOptional = Optional.empty();
     }
 
     public Site(SiteBuilder builder) {
@@ -21,21 +23,17 @@ public class Site {
         this.timeout = builder.timeout;
 
         this.status = new SiteStatus();
-        this.alert = builder.alert;
+        this.alertOptional = Optional.of(builder.alert);
     }
 
     private String uri;
     private boolean enabledCheck;
     private int timeout;
     private SiteStatus status;
-    private Alert alert;
+    private Optional<Alert> alertOptional;
 
-    public boolean hasAlert() {
-        return alert != null;
-    }
-
-    public Alert getAlert() {
-        return alert;
+    public Optional<Alert> getAlertOptional() {
+        return alertOptional;
     }
 
     public String getUri() {
@@ -73,6 +71,10 @@ public class Site {
     @Override
     public String toString() {
         return this.uri + " " + this.status;
+    }
+
+    public boolean hasAlert() {
+        return alertOptional.isPresent();
     }
 
     // site builder

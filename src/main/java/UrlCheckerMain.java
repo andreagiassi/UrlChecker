@@ -53,11 +53,14 @@ public class UrlCheckerMain {
                 .alert(emailAlert)
                 .build());
 
-        // check the sites
+        // check the list of sites
         urlCheckerService.checkSites();
 
         // dump last site's status
         urlCheckerService.dumpSites();
+
+        // check a single website with one line command
+        System.out.println(urlCheckerService.check("https://www.yahoo.com").toString());
     }
 
 }

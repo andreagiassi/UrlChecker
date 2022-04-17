@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class UrlCheckerService {
 
@@ -33,18 +34,19 @@ public class UrlCheckerService {
         }
     }
 
-    public void checkSite(Site site) {
-        // check if site is enabled
+    public SiteStatus check(String uri) {
+        Site site = new Site(uri);
+        checkSite(site);
+        return site.getStatus();
+    }
+
+    public Optional<SiteStatus> checkSite(Site site) {
         if (!site.isEnabledCheck()) {
             SiteStatus status = site.getStatus();
             status.setHttpStatus(-1);
-            status.setLastCheckDt(LocalDateTime.now());
-
-            System.out.println(site + " (skip)");
-            return ;
+            return Optional.of(status);
         }
 
-        // perform the http call
         HttpClient httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofMillis(site.getTimeout())).build();
 
         URI uri = URI.create(site.getUri());
@@ -53,44 +55,43 @@ public class UrlCheckerService {
         try {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            // store last status data
-            SiteStatus status = site.getStatus();
-            status.setFromResponse(response);
+            handleResponse(site, response);
 
-            // handle the alert
-            Alert alert = site.getAlert();
-            if (alert != null) {
-                // check status code - http error
-                if (alert.hasCondition()) {
-                    // evaluate the condition
-                    if (alert.getAlertCondition().check(response.statusCode())) {
-                        // set last date of failure
-                        status.setLastFailureDt(LocalDateTime.now());
-                        sendAlert(site);
-                    }
-                } else {
-                    // otherwise standard check on the http status 200 OK
-                    if (response.statusCode() != 200) {
-                        // set last date of failure
-                        status.setLastFailureDt(LocalDateTime.now());
-                        sendAlert(site);
-                    }
-                }
-            }
-
-            System.out.println(site);
+            return Optional.of(site.getStatus());
         } catch(Exception e) {
             e.printStackTrace();
+            return Optional.empty();
         }
     }
 
-    private void sendAlert(Site site) {
-        if (site.hasAlert()) {
-            Alert alert = site.getAlert();
-            boolean sent = alert.sendAlert();
-            if (!sent) {
-                System.out.println("Error sending the alert for the site " + site);
+    private void handleResponse(Site site, HttpResponse<String> response) {
+        // store status data
+        SiteStatus status = site.getStatus();
+        status.setFromResponse(response);
+
+        Optional<Alert> alertOpt = site.getAlertOptional();
+        if (alertOpt.isPresent()) {
+            // check status code - http error
+            Alert alert = alertOpt.get();
+            if (alert.hasCondition()) {
+                if (alert.getAlertCondition().check(response.statusCode())) {
+                    sendAlert(alert, site);
+                }
+            } else {
+                // standard check on the http status 200 OK
+                if (response.statusCode() != 200) {
+                    sendAlert(alert, site);
+                }
             }
+        }
+    }
+
+    private void sendAlert(Alert alert, Site site) {
+        // set last date of failure
+        site.getStatus().setLastFailureDt(LocalDateTime.now());
+        boolean sent = alert.sendAlert();
+        if (!sent) {
+            System.out.println("Error sending the alert for the site " + site);
         }
     }
 
@@ -111,7 +112,8 @@ public class UrlCheckerService {
         stringBuilder.append(site.getUri() + " ");
 
         if (site.hasAlert()) {
-            stringBuilder.append(site.getAlert().getName() + " ");
+            Alert alert = site.getAlertOptional().get();
+            stringBuilder.append("(" + alert.getName() + ")");
         }
 
         return stringBuilder.toString();
