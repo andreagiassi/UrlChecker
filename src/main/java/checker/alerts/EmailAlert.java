@@ -8,7 +8,7 @@ public class EmailAlert extends Alert {
 
     @Override
     public String getName() {
-        return "EmailAlert";
+        return "Email Alert";
     }
 
     @Override

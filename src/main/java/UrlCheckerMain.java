@@ -1,3 +1,4 @@
+import checker.alerts.EmailAlert;
 import checker.sites.Site;
 import checker.UrlCheckerService;
 import checker.conditions.AlertCondition;
@@ -15,7 +16,7 @@ public class UrlCheckerMain {
 
 
         // check with an alert
-        urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/999")
+        urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/99")
                                     .timeout(1000)
                                     .alert(new ConsoleAlert("Error during contacting google site"))
                                     .build());
@@ -38,9 +39,18 @@ public class UrlCheckerMain {
         AlertCondition alertCondition2 = new InRangeCondition(400, 451);
         alert.setAlertCondition(alertCondition2);
 
-        urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/999")
+        urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/9999")
                 .timeout(1000)
                 .alert(alert2)
+                .build());
+
+        // use an email condition
+        EmailAlert emailAlert = new EmailAlert("In range 400-451 on google site");
+        emailAlert.setAlertCondition(new EqualsCondition(404));
+
+        urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/99999")
+                .timeout(1000)
+                .alert(emailAlert)
                 .build());
 
         // check the sites
