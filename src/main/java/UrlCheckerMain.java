@@ -1,7 +1,9 @@
 import checker.Site;
 import checker.UrlCheckerService;
-import checker.alert.AlertCondition;
+import checker.conditions.AlertCondition;
 import checker.alert.ConsoleAlert;
+import checker.conditions.EqualsCondition;
+import checker.conditions.InRangeCondition;
 
 public class UrlCheckerMain {
 
@@ -22,9 +24,7 @@ public class UrlCheckerMain {
         // check a site with an alert condition, detecting only 404
         ConsoleAlert alert = new ConsoleAlert("404 on google site");
 
-        AlertCondition alertCondition = new AlertCondition();
-        alertCondition.setStatusCode(404);
-
+        AlertCondition alertCondition = new EqualsCondition(404);
         alert.setAlertCondition(alertCondition);
 
         urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/999")
@@ -32,6 +32,18 @@ public class UrlCheckerMain {
                 .alert(alert)
                 .build());
 
+        // check a site with an in range condition
+        ConsoleAlert alert2 = new ConsoleAlert("404 on google site");
+
+        AlertCondition alertCondition2 = new InRangeCondition(400, 451);
+        alert.setAlertCondition(alertCondition2);
+
+        urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/999")
+                .timeout(1000)
+                .alert(alert2)
+                .build());
+
+        // check the sites
         urlCheckerService.checkSites();
 
         // dump last site's status

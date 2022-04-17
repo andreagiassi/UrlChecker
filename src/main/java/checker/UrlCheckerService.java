@@ -66,9 +66,8 @@ public class UrlCheckerService {
             if (alert != null) {
                 // check status code - http error
                 if (alert.hasCondition()) {
-                    // evaluate the alert condition
-                    int statusCode = alert.getAlertCondition().getStatusCode();
-                    if (response.statusCode() == statusCode) {
+                    // evaluate the condition
+                    if (alert.getAlertCondition().check(response.statusCode())) {
                         // set last date of failure
                         status.setLastFailureDt(LocalDateTime.now());
                         sendAlert(site);

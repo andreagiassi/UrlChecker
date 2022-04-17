@@ -1,5 +1,7 @@
 package checker.alert;
 
+import checker.conditions.AlertCondition;
+
 public abstract class Alert {
 
     public Alert() {
