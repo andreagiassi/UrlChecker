@@ -51,15 +51,9 @@ public class UrlCheckerService {
         try {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            int contentLength = response.body().length();
-            HttpClient.Version version = response.version();
-
             // store last status data
             SiteStatus status = site.getStatus();
-            status.setHttpStatus(response.statusCode());
-            status.setContentLength(contentLength);
-            status.setVersion(version);
-            status.setLastCheckDt(LocalDateTime.now());
+            status.setFromResponse(response);
 
             // handle the alert
             Alert alert = site.getAlert();

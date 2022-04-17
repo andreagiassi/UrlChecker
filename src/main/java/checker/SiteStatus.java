@@ -1,6 +1,7 @@
 package checker;
 
 import java.net.http.HttpClient;
+import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 
 /** */
@@ -56,6 +57,16 @@ public class SiteStatus {
     public String toString() {
         return this.version + " " + this.httpStatus + " Content " + this.contentLength + " byte "
                 + " on " + getLastCheckDt();
+    }
+
+    public void setFromResponse(HttpResponse<String> response) {
+        int contentLength = response.body().length();
+        HttpClient.Version version = response.version();
+
+        this.setHttpStatus(response.statusCode());
+        this.setContentLength(contentLength);
+        this.setVersion(version);
+        this.setLastCheckDt(LocalDateTime.now());
     }
 
 }
