@@ -1,4 +1,4 @@
-package checker.alert;
+package checker.alerts;
 
 public class ConsoleAlert extends Alert {
 

@@ -1,6 +1,6 @@
-package checker;
+package checker.sites;
 
-import checker.alert.Alert;
+import checker.alerts.Alert;
 
 public class Site {
 

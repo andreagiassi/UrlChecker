@@ -1,4 +1,4 @@
-package checker;
+package checker.sites;
 
 import java.net.http.HttpClient;
 import java.net.http.HttpResponse;

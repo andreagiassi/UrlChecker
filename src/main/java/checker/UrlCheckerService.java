@@ -1,6 +1,8 @@
 package checker;
 
-import checker.alert.Alert;
+import checker.alerts.Alert;
+import checker.sites.Site;
+import checker.sites.SiteStatus;
 
 import java.net.URI;
 import java.net.http.HttpClient;

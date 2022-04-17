@@ -1,7 +1,7 @@
-import checker.Site;
+import checker.sites.Site;
 import checker.UrlCheckerService;
 import checker.conditions.AlertCondition;
-import checker.alert.ConsoleAlert;
+import checker.alerts.ConsoleAlert;
 import checker.conditions.EqualsCondition;
 import checker.conditions.InRangeCondition;
 

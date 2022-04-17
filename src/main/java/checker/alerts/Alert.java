@@ -1,4 +1,4 @@
-package checker.alert;
+package checker.alerts;
 
 import checker.conditions.AlertCondition;
 
