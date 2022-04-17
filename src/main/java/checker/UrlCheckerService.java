@@ -16,6 +16,8 @@ import java.util.Optional;
 
 public class UrlCheckerService {
 
+    public static final int HTTP_OK = 200;
+
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public UrlCheckerService() {
@@ -79,7 +81,7 @@ public class UrlCheckerService {
                 }
             } else {
                 // standard check on the http status 200 OK
-                if (response.statusCode() != 200) {
+                if (response.statusCode() != HTTP_OK) {
                     sendAlert(alert, site);
                 }
             }
