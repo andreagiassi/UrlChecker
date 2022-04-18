@@ -17,7 +17,7 @@ public class InRangeCondition extends AlertCondition {
 
     @Override
     public String toString() {
-        return " [" + min + " / " + max + "]";
+        return "[" + min + " / " + max + "]";
     }
 
 }

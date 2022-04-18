@@ -15,7 +15,7 @@ public class EqualsCondition extends AlertCondition {
 
     @Override
     public String toString() {
-        return " [" + httpStatus + "]";
+        return "[" + httpStatus + "]";
     }
 
 }
