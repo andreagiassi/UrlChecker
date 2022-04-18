@@ -25,13 +25,14 @@ public class FileAlert extends Alert {
     }
 
     @Override
-    public boolean sendAlert(Site site) {
+    public boolean send(Site site) {
         try
         {
+            // append log on file
             FileWriter fw = new FileWriter(fileName, true);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String fileLogText = site.toString();
+            String fileLogText = site.toString() + this.getAlertCondition().toString();
             bw.write(fileLogText);
 
             bw.newLine();

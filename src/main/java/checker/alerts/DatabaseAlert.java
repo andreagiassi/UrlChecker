@@ -14,7 +14,7 @@ public class DatabaseAlert extends Alert {
     }
 
     @Override
-    public boolean sendAlert(Site site) {
+    public boolean send(Site site) {
 
         //
         //  TODO: implement alert persistent data on jdbc database

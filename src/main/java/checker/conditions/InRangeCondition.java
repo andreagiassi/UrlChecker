@@ -15,4 +15,9 @@ public class InRangeCondition extends AlertCondition {
         return httpStatus >= min && httpStatus <= max;
     }
 
+    @Override
+    public String toString() {
+        return " [" + min + " / " + max + "]";
+    }
+
 }

@@ -5,10 +5,6 @@ import checker.sites.Site;
 
 public abstract class Alert {
 
-    public Alert() {
-        // empty impl
-    }
-
     public Alert(String message) {
         this.message = message;
         // default no condition
@@ -16,6 +12,7 @@ public abstract class Alert {
     }
 
     private String message;
+    private AlertCondition alertCondition;
 
     public String getMessage() {
         return this.message;
@@ -25,8 +22,6 @@ public abstract class Alert {
         return alertCondition != null;
     }
 
-    private AlertCondition alertCondition;
-
     public AlertCondition getAlertCondition() {
         return this.alertCondition;
     }
@@ -35,7 +30,7 @@ public abstract class Alert {
         this.alertCondition = alertCondition;
     }
 
-    public abstract boolean sendAlert(Site site);
+    public abstract boolean send(Site site);
 
     public abstract String getName();
 

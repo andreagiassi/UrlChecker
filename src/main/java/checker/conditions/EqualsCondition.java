@@ -13,4 +13,9 @@ public class EqualsCondition extends AlertCondition {
         return this.httpStatus == httpStatus;
     }
 
+    @Override
+    public String toString() {
+        return " [" + httpStatus + "]";
+    }
+
 }

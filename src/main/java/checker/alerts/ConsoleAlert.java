@@ -14,8 +14,8 @@ public class ConsoleAlert extends Alert {
     }
 
     @Override
-    public boolean sendAlert(Site site) {
-        // standard console log alert
+    public boolean send(Site site) {
+        // console log alert
         System.out.println("Console alert: " + this.getMessage());
         return true;
     }

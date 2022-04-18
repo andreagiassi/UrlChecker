@@ -14,7 +14,7 @@ public class EmailAlert extends Alert {
     }
 
     @Override
-    public boolean sendAlert(Site site) {
+    public boolean send(Site site) {
 
         //
         //  TODO: implement smtp email alert
