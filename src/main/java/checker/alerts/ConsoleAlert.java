@@ -13,6 +13,7 @@ public class ConsoleAlert extends Alert {
 
     @Override
     public boolean sendAlert() {
+        // standard console log alert
         System.out.println("Console alert: " + this.getMessage());
         return true;
     }

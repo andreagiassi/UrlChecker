@@ -1,21 +1,21 @@
 package checker.alerts;
 
-public class EmailAlert extends Alert {
+public class FileAlert extends Alert {
 
-    public EmailAlert(String message) {
+    public FileAlert(String message) {
         super(message);
     }
 
     @Override
     public String getName() {
-        return "Email Alert";
+        return "File Alert";
     }
 
     @Override
     public boolean sendAlert() {
 
         //
-        //  TODO: implement smtp email alert
+        //  TODO: implement file alert
         //
 
         return false;
