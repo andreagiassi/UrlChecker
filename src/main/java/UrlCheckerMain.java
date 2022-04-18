@@ -1,10 +1,11 @@
-import checker.alerts.EmailAlert;
-import checker.sites.Site;
 import checker.UrlCheckerService;
-import checker.conditions.AlertCondition;
 import checker.alerts.ConsoleAlert;
+import checker.alerts.EmailAlert;
+import checker.alerts.FileAlert;
+import checker.conditions.AlertCondition;
 import checker.conditions.EqualsCondition;
 import checker.conditions.InRangeCondition;
+import checker.sites.Site;
 
 public class UrlCheckerMain {
 
@@ -44,13 +45,22 @@ public class UrlCheckerMain {
                 .alert(alert2)
                 .build());
 
-        // use an email condition
+        // use an email condition (TODO)
         EmailAlert emailAlert = new EmailAlert("In range 400-451 on google site");
         emailAlert.setAlertCondition(new EqualsCondition(404));
 
         urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/99999")
                 .timeout(1000)
                 .alert(emailAlert)
+                .build());
+
+        // use a file alert
+        FileAlert fileAlert = new FileAlert("site.log", "Check 404 on google.com");
+        fileAlert.setAlertCondition(new EqualsCondition(404));
+
+        urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/99999")
+                .timeout(1000)
+                .alert(fileAlert)
                 .build());
 
         // check the list of sites

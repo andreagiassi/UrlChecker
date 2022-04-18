@@ -91,7 +91,7 @@ public class UrlCheckerService {
     private void sendAlert(Alert alert, Site site) {
         // set last date of failure
         site.getStatus().setLastFailureDt(LocalDateTime.now());
-        boolean sent = alert.sendAlert();
+        boolean sent = alert.sendAlert(site);
         if (!sent) {
             System.out.println("Error sending the alert for the site " + site);
         }

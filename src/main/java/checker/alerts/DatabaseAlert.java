@@ -1,5 +1,7 @@
 package checker.alerts;
 
+import checker.sites.Site;
+
 public class DatabaseAlert extends Alert {
 
     public DatabaseAlert(String message) {
@@ -12,7 +14,7 @@ public class DatabaseAlert extends Alert {
     }
 
     @Override
-    public boolean sendAlert() {
+    public boolean sendAlert(Site site) {
 
         //
         //  TODO: implement alert persistent data on jdbc database

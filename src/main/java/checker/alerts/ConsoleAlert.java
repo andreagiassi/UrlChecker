@@ -1,5 +1,7 @@
 package checker.alerts;
 
+import checker.sites.Site;
+
 public class ConsoleAlert extends Alert {
 
     public ConsoleAlert(String message) {
@@ -12,7 +14,7 @@ public class ConsoleAlert extends Alert {
     }
 
     @Override
-    public boolean sendAlert() {
+    public boolean sendAlert(Site site) {
         // standard console log alert
         System.out.println("Console alert: " + this.getMessage());
         return true;

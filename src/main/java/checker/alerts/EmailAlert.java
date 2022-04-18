@@ -1,5 +1,7 @@
 package checker.alerts;
 
+import checker.sites.Site;
+
 public class EmailAlert extends Alert {
 
     public EmailAlert(String message) {
@@ -12,7 +14,7 @@ public class EmailAlert extends Alert {
     }
 
     @Override
-    public boolean sendAlert() {
+    public boolean sendAlert(Site site) {
 
         //
         //  TODO: implement smtp email alert

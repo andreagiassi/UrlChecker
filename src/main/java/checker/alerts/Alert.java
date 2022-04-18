@@ -1,6 +1,7 @@
 package checker.alerts;
 
 import checker.conditions.AlertCondition;
+import checker.sites.Site;
 
 public abstract class Alert {
 
@@ -34,7 +35,7 @@ public abstract class Alert {
         this.alertCondition = alertCondition;
     }
 
-    public abstract boolean sendAlert();
+    public abstract boolean sendAlert(Site site);
 
     public abstract String getName();
 
