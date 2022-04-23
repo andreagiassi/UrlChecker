@@ -17,14 +17,17 @@ public abstract class Alert {
     private String message;
     private AlertCondition alertCondition;
 
+    /** REturn the message to give associated to this alert */
     public String getMessage() {
         return this.message;
     }
 
+    /** Return true if this alert contains an alert condition */
     public boolean hasCondition() {
         return alertCondition != null;
     }
 
+    /** Return the alert condition set for this alert if exists, null otherwise */
     public AlertCondition getAlertCondition() {
         return this.alertCondition;
     }
@@ -35,6 +38,7 @@ public abstract class Alert {
         this.alertCondition = alertCondition;
     }
 
+    /** Send the alert for the given site */
     public abstract boolean send(Site site);
 
     /** Return the alert name to display */
