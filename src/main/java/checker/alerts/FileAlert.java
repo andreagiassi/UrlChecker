@@ -33,7 +33,7 @@ public class FileAlert extends Alert {
             FileWriter fw = new FileWriter(fileName, true);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String fileLogText = site.toString() + " " + this.getMessage() + " " + getAlertCondition().toString();
+            String fileLogText = site.toString() + " " + this.getMessage() + " " + getOptionalAlertCondition().toString();
             bw.write(fileLogText);
 
             bw.newLine();

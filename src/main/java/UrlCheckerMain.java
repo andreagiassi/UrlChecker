@@ -27,7 +27,7 @@ public class UrlCheckerMain {
         ConsoleAlert alert = new ConsoleAlert("404 on google site");
 
         AlertCondition alertCondition = new EqualsCondition(404);
-        alert.setAlertCondition(alertCondition);
+        alert.setOptionalAlertCondition(alertCondition);
 
         urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/999")
                 .timeout(1000)
@@ -38,7 +38,7 @@ public class UrlCheckerMain {
         ConsoleAlert alert2 = new ConsoleAlert("In range 400-451 on google site");
 
         AlertCondition alertCondition2 = new InRangeCondition(400, 451);
-        alert.setAlertCondition(alertCondition2);
+        alert.setOptionalAlertCondition(alertCondition2);
 
         urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/9999")
                 .timeout(1000)
@@ -47,7 +47,7 @@ public class UrlCheckerMain {
 
         // use an email condition (TODO)
         EmailAlert emailAlert = new EmailAlert("In range 400-451 on google site");
-        emailAlert.setAlertCondition(new EqualsCondition(404));
+        emailAlert.setOptionalAlertCondition(new EqualsCondition(404));
 
         urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/99999")
                 .timeout(1000)
@@ -56,7 +56,7 @@ public class UrlCheckerMain {
 
         // use a file alert
         FileAlert fileAlert = new FileAlert("site.log", "Check 404 on google.com");
-        fileAlert.setAlertCondition(new EqualsCondition(404));
+        fileAlert.setOptionalAlertCondition(new EqualsCondition(404));
 
         urlCheckerService.addSite(new Site.SiteBuilder("https://www.google.com/99999")
                 .timeout(1000)

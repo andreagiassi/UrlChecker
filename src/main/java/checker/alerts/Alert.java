@@ -3,6 +3,8 @@ package checker.alerts;
 import checker.conditions.AlertCondition;
 import checker.sites.Site;
 
+import java.util.Optional;
+
 /** A generic alert */
 public abstract class Alert {
 
@@ -11,11 +13,11 @@ public abstract class Alert {
     public Alert(final String message) {
         this.message = message;
         // default no condition
-        this.alertCondition = null;
+        this.optionalAlertCondition = Optional.empty();
     }
 
     private String message;
-    private AlertCondition alertCondition;
+    private Optional<AlertCondition> optionalAlertCondition;
 
     /** Return the message to give associated to this alert */
     public String getMessage() {
@@ -24,18 +26,18 @@ public abstract class Alert {
 
     /** Return true if this alert contains an alert condition */
     public boolean hasCondition() {
-        return alertCondition != null;
+        return optionalAlertCondition.isPresent();
     }
 
     /** Return the alert condition set for this alert if exists, null otherwise */
-    public AlertCondition getAlertCondition() {
-        return this.alertCondition;
+    public Optional<AlertCondition> getOptionalAlertCondition() {
+        return this.optionalAlertCondition;
     }
 
     /** Set an alert condition on this alert.
-     * @param alertCondition the condition that must be evaluated */
-    public void setAlertCondition(AlertCondition alertCondition) {
-        this.alertCondition = alertCondition;
+     * @param optionalAlertCondition the condition that must be evaluated */
+    public void setOptionalAlertCondition(AlertCondition optionalAlertCondition) {
+        this.optionalAlertCondition = Optional.of(optionalAlertCondition);
     }
 
     /** Send the alert for the given site */

@@ -83,7 +83,7 @@ public class UrlCheckerService {
             // check status code - http error
             Alert alert = alertOpt.get();
             if (alert.hasCondition()) {
-                if (alert.getAlertCondition().check(response.statusCode())) {
+                if (alert.getOptionalAlertCondition().get().check(response.statusCode())) {
                     sendAlert(alert, site);
                 }
             } else {
@@ -96,7 +96,7 @@ public class UrlCheckerService {
     }
 
     /** Call the alert method for the given site */
-    private void sendAlert(Alert alert, Site site) {
+    private void sendAlert(final Alert alert, final Site site) {
         // set last date of failure
         site.getStatus().setLastFailureDt(LocalDateTime.now());
         boolean sent = alert.send(site);
