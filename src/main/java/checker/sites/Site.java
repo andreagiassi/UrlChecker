@@ -4,6 +4,7 @@ import checker.alerts.Alert;
 
 import java.util.Optional;
 
+/** A site that must be checked and its related data */
 public class Site {
 
     public static int DEFAULT_TIMEOUT = 2000;
@@ -77,7 +78,7 @@ public class Site {
         return alertOptional.isPresent();
     }
 
-    // site builder
+    /** A Site builder */
     public static class SiteBuilder {
 
         private String uri;

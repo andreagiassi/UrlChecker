@@ -2,6 +2,7 @@ package checker.alerts;
 
 import checker.sites.Site;
 
+/** A void implementation for an email alert */
 public class EmailAlert extends Alert {
 
     public EmailAlert(String message) {

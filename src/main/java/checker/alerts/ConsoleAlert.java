@@ -2,8 +2,10 @@ package checker.alerts;
 
 import checker.sites.Site;
 
+/** Implement a console log alert on standard output */
 public class ConsoleAlert extends Alert {
 
+    /** Create a console log alert */
     public ConsoleAlert(String message) {
         super(message);
     }
@@ -13,6 +15,7 @@ public class ConsoleAlert extends Alert {
         return "Console alert";
     }
 
+    /** Print the console message for the given site */
     @Override
     public boolean send(Site site) {
         // console log alert

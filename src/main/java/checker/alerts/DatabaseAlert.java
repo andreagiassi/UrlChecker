@@ -2,6 +2,7 @@ package checker.alerts;
 
 import checker.sites.Site;
 
+/** A void implementation for future database persistence */
 public class DatabaseAlert extends Alert {
 
     public DatabaseAlert(String message) {

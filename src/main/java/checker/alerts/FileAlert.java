@@ -5,6 +5,7 @@ import checker.sites.Site;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+/** a concrete implementation for a file alert log */
 public class FileAlert extends Alert {
 
     public static final String TEST_LOG = "test.log";

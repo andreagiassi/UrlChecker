@@ -58,6 +58,7 @@ public class SiteStatus {
         return this.version + " " + this.httpStatus + " Content " + this.contentLength + " byte on " + getLastCheckDt();
     }
 
+    /** set this site status data from a given HttpResponse */
     public void setFromResponse(HttpResponse<String> response) {
         this.setHttpStatus(response.statusCode());
         this.setContentLength(response.body().length());

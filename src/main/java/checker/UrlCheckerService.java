@@ -14,8 +14,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/** A URL service that check a site or a list of site. */
 public class UrlCheckerService {
 
+    /** Http status OK */
     public static final int HTTP_OK = 200;
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -26,22 +28,26 @@ public class UrlCheckerService {
 
     private ArrayList<Site> sites;
 
+    /** Append the given site to the site list */
     public void addSite(Site site) {
         sites.add(site);
     }
 
+    /** Check the site list */
     public void checkSites() {
         for (Site site : sites) {
             checkSite(site);
         }
     }
 
+    /** Check a single site */
     public SiteStatus check(String uri) {
         Site site = new Site(uri);
         checkSite(site);
         return site.getStatus();
     }
 
+    /** Check a single site and return a SiteStatus */
     public Optional<SiteStatus> checkSite(Site site) {
         if (!site.isEnabledCheck()) {
             SiteStatus status = site.getStatus();
@@ -66,6 +72,7 @@ public class UrlCheckerService {
         }
     }
 
+    /** Handle the response and retrieve the http status data. Check the alert conditions. */
     private void handleResponse(Site site, HttpResponse<String> response) {
         // store status data
         SiteStatus status = site.getStatus();
@@ -88,6 +95,7 @@ public class UrlCheckerService {
         }
     }
 
+    /** Call the alert method for the given site */
     private void sendAlert(Alert alert, Site site) {
         // set last date of failure
         site.getStatus().setLastFailureDt(LocalDateTime.now());
@@ -97,6 +105,7 @@ public class UrlCheckerService {
         }
     }
 
+    /** Print the site list */
     public void dumpSites() {
         System.out.println("Site status:");
         for (Site site : sites) {
@@ -104,6 +113,7 @@ public class UrlCheckerService {
         }
     }
 
+    /** Print a single site information */
     private String getSiteInfo(final Site site) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(site.getStatus().getLastCheckDt().format(formatter));

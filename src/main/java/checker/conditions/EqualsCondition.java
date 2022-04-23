@@ -1,5 +1,6 @@
 package checker.conditions;
 
+/** Implement an equals alert condition */
 public class EqualsCondition extends AlertCondition {
 
     public EqualsCondition(int httpStatus) {
