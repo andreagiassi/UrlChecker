@@ -17,7 +17,7 @@ public abstract class Alert {
     private String message;
     private AlertCondition alertCondition;
 
-    /** REturn the message to give associated to this alert */
+    /** Return the message to give associated to this alert */
     public String getMessage() {
         return this.message;
     }
